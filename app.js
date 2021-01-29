@@ -1,3 +1,4 @@
+//object for the product
 const product1 = {
     sku: "001",
     price: 50
@@ -20,7 +21,7 @@ const product4 = {
 
 const products = [product1, product2, product3, product4];
 let orders = [];
-
+//for local storage 
 if (localStorage.getItem("orders")) {
     orders = JSON.parse(localStorage.getItem("orders"));
 } else {
@@ -63,22 +64,26 @@ document.getElementById("sku-dropdown").addEventListener("change", (event) => {
         }
     }
 });
-
+//variables created for height and width
 const frameWidth = document.getElementById("frame-width");
 const frameHeight = document.getElementById("frame-height");
 
+//event listener for frame width on input and adds value to perimeter
 
 frameWidth.addEventListener("input", (event) => {
     updatePerimeter(Number(frameHeight.value), Number(frameWidth.value));
 });
 
+// event listener for frame height on input and adds value to perimeter
+
 frameHeight.addEventListener("input", (event) => {
     updatePerimeter(Number(frameHeight.value), Number(frameWidth.value));
 });
 
-
+//function to update perimeter from height and width
 function updatePerimeter(height, width) {
 
+    //condition use so height and width is not leave as zero
     if (height > 0 && width > 0) {
         const perimeter = 2 * (height + width);
         document.getElementById("totalperimeter").innerText = perimeter;
@@ -86,6 +91,8 @@ function updatePerimeter(height, width) {
         document.getElementById("totalperimeter").innerText = "0";
     }
 }
+
+//function created to calculate price
 
 function calculatePrice(price, perimeter) {
     const framePrice = price * perimeter;
@@ -97,16 +104,17 @@ function calculatePrice(price, perimeter) {
     };
 }
 
+//click event added so it calculate frame price
 
 document.getElementById("calculate").addEventListener("click", () => {
     const price = Number(document.getElementById("skuprice").innerText);
     const perimeter = Number(document.getElementById("totalperimeter").innerText);
     calculatePrice(price, perimeter);
 });
-
+//add to order event is added
 document.getElementById("addToOrderButton").addEventListener("click", addToOrder);
 
-
+//function create table
 function addToOrder() {
     const sku = document.getElementById("sku-dropdown").value;
     const quantity = 1;
@@ -128,7 +136,7 @@ function addToOrder() {
 }
 
 
-
+//function created to fill the table by order list
 function populateOrderTable() {
     const orderTable = document.getElementById("order-table");
 
@@ -187,6 +195,7 @@ function populateOrderTable() {
 
         clearForm();
     }
+
     let sum = 0;
     for (let item = 0; item < orders.length; item++) {
         sum = sum + Number(orders[item].lineTotal);
@@ -194,7 +203,7 @@ function populateOrderTable() {
     document.getElementById("order-total").innerText = sum;
 
 }
-
+//function created so on refresh value of form refresh
 function clearForm() {
     document.getElementById("sku-dropdown").value = "";
     document.getElementById("price-cm").innerText = "";
