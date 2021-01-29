@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+
+<body class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-6 calculator">
+            <h2 class="mb-5">Wooden Frame Calculator</h2>
+
+            <form class="sku">
+                <div class="row">
+                    <div class="col">
+                        <label>Select SKU</label>
+                    </div>
+                    <div id="skuid" class="col">
+                        <select id="sku-dropdown" class="dropdown">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label>Price/Cm</label>
+                    </div>
+                    <div id="skuprice" class="col">
+                        <p id="price-cm"></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label>Width/Cm</label>
+                    </div>
+                    <div class="col">
+                        <input id="frame-width" type="number" min="0"><br>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label>Height/Cm</label>
+                    </div>
+                    <div class="col">
+                        <input id="frame-height" type="number" min="1"><br>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label>Total Perimeter</label>
+                    </div>
+                    <div class="col">
+                        <p id="totalperimeter"></p>
+                    </div>
+                </div>
+
+                <div id="frameprice" class="row">
+                    <div class="col">
+                        <label>Price of one frame</label>
+                    </div>
+                    <div class="col">
+                        <p id="frame-price"></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col">
+                        <button id="calculate" class="btn btn-light" type="button">Calculate</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col">
+                        <button id="addToOrderButton" class="btn btn-light" type="button" disabled>Add to order
+                            >></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col col-sm-12 col-md-6 orders">
+            <h2>Orders</h2>
+            <table id="order-table" style="width:100%" class="table">
+                <tr>
+                    <th>SKU</th>
+                    <th>QUANTITY</th>
+                    <th>WIDTH</th>
+                    <th>HEIGHT</th>
+                    <th>LINE TOTAL</th>
+                </tr>
+            </table>
+
+            <h3>Order Total : <span id="order-total"></span></h3>
+        </div>
+        <!-- </div> -->
+
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+
+</html>
