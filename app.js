@@ -21,6 +21,13 @@ const product4 = {
 const products = [product1, product2, product3, product4];
 let orders = [];
 
+if (localStorage.getItem("orders")) {
+    orders = JSON.parse(localStorage.getItem("orders"));
+} else {
+    orders = [];
+}
+
+populateOrderTable();
 // --------------------------------------------------------------------------------------
 
 
@@ -116,6 +123,7 @@ function addToOrder() {
     };
 
     orders.push(orderItem);
+    localStorage.setItem("orders", JSON.stringify(orders));
     populateOrderTable();
 }
 
@@ -123,6 +131,33 @@ function addToOrder() {
 
 function populateOrderTable() {
     const orderTable = document.getElementById("order-table");
+
+    orderTable.getElementsByTagName("tbody")[0].innerHTML = "";
+
+    const header = document.createElement("tr");
+
+    const th_sku = document.createElement("th");
+    th_sku.innerText = "SKU";
+
+    const th_quantity = document.createElement("th");
+    th_quantity.innerText = "QUANTITY";
+
+    const th_width = document.createElement("th");
+    th_width.innerText = "WIDTH";
+
+    const th_height = document.createElement("th");
+    th_height.innerText = "HEIGHT";
+
+    const th_lineTotal = document.createElement("th");
+    th_lineTotal.innerText = "LINE TOTAL";
+
+    header.appendChild(th_sku);
+    header.appendChild(th_quantity);
+    header.appendChild(th_width);
+    header.appendChild(th_height);
+    header.appendChild(th_lineTotal);
+
+    orderTable.getElementsByTagName("tbody")[0].appendChild(header);
 
     for (let i = 0; i < orders.length; i++) {
         const tr = document.createElement("tr");
@@ -150,15 +185,17 @@ function populateOrderTable() {
 
         orderTable.getElementsByTagName("tbody")[0].appendChild(tr);
 
-        let total = Number(document.getElementById("order-total").innerText);
-        total = total + Number(orders[i].lineTotal);
-        document.getElementById("order-total").innerText = total;
         clearForm();
     }
+    let sum = 0;
+    for (let item = 0; item < orders.length; item++) {
+        sum = sum + Number(orders[item].lineTotal);
+    }
+    document.getElementById("order-total").innerText = sum;
+
 }
 
 function clearForm() {
-    orders = [];
     document.getElementById("sku-dropdown").value = "";
     document.getElementById("price-cm").innerText = "";
     document.getElementById("frame-width").value = "";
